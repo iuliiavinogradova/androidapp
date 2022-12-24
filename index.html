@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage plan</title>
+
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <style>
+        .box {
+            position: absolute;
+            border: 1px solid black;
+            /* Add transparency to the boxes */
+            opacity: 0.5;
+        }
+
+        #img-responsive {
+            max-width: 100%;
+            height: auto;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>How to save up for an apartment?</h1>
+    <p>Here is an interactive plan for you to save up for your future apartment.</p>
+
+    <form id="down-payment-form">
+        <input type="radio" id="studio" name="housing-options" value="studio" checked onclick="showImage()">
+        <label for="studio">Studio</label><br>
+        <input type="radio" id="1bedroom" name="housing-options" value="1bedroom" onclick="showImage()">
+        <label for="1bedroom">1 Bedroom</label><br>
+        <input type="radio" id="2bedrooms" name="housing-options" value="2bedrooms" onclick="showImage()">
+        <label for="2bedrooms">2 Bedrooms</label><br>
+        <input type="radio" id="townhouse" name="housing-options" value="townhouse" onclick="showImage()">
+        <label for="townhouse">Townhouse</label>
+        <label for="loan-amount">Loan Amount:</label><br>
+        <input type="number" id="loan-amount" name="loan-amount"><br>
+        <label for="down-payment-percentage">Down Payment Percentage:</label><br>
+        <input type="number" id="down-payment-percentage" name="down-payment-percentage"><br>
+        <label for="down-payment-percentage">Savings:</label><br>
+        <input type="number" id="down-payment-percentage" name="down-payment-percentage"><br>
+        <label for="years">Will be saving for:</label><br>
+        <input type="range" min="1" max="20" value="1" class="slider" id="years" oninput="showImage()">
+
+        <input type="submit" value="Calculate Down Payment">
+        <!-- Button to download the PDF file -->
+        <button id="download-button">Download PDF</button>
+    </form>
+
+    <!-- Display the down payment amount -->
+    <div id="down-payment-amount"></div>
+
+    <!-- The image container will be populated with the appropriate image based on the selected radio button -->
+    <div id="image-container" class="img-responsive"></div>
+
+    <div class="container" id="apartment-container">
+        <div class="main-content">
+            <div class="door-hor"></div>
+            <div class="utility">
+                <div class="door-hor"></div>
+                <div class="name">utility room</div>
+            </div>
+            <div class="kitchen">
+                <div class="ref"></div>
+                <div class="rug"></div>
+                <div class="cabinets">
+                    <div class="stove"></div>
+                </div>
+                <div class="sink">
+                    <div class="sink-tap-1"></div>
+                    <div class="sink-tap-2"></div>
+                </div>
+                <div class="island">
+                    <div class="chair"></div>
+                </div>
+                <div class="name">kitchen</div>
+            </div>
+            <div class="bathroom-2">
+                <div class="window-hor"></div>
+                <div class="door-hor"></div>
+                <div class="shower"></div>
+                <div class="toilet"></div>
+                <div class="vanity"></div>
+                <div class="rug"></div>
+                <div class="name">bath #1</div>
+            </div>
+            <div class="bedroom-2">
+                <div class="door-ver"></div>
+                <div class="window-hor"></div>
+                <div class="bed-table"></div>
+                <div class="bed">
+                    <div class="blanket"></div>
+                    <div class="pillow"></div>
+                </div>
+                <div class="table"></div>
+                <div class="name">bedroom</div>
+            </div>
+
+            <div class="living-room">
+                <div class="rug"></div>
+                <div class="window-ver"></div>
+                <div class="sofa"></div>
+                <div class="coffee-table"></div>
+                <div class="tv-set"></div>
+                <div class="name">living room</div>
+            </div>
+            <div class="bedroom-1">
+                <div class="rug"></div>
+                <div class="door-hor"></div>
+                <div class="window-hor"></div>
+                <div class="bed">
+                    <div class="blanket"></div>
+                    <div class="pillow"></div>
+                    <div class="pillow"></div>
+                </div>
+                <div class="bed-table"></div>
+                <div class="bed-table"></div>
+                <div class="name">master bedroom</div>
+            </div>
+            <div class="closet">
+                <div class="wall-gap"></div>
+                <div class="name">walk-in closet</div>
+            </div>
+            <div class="bathroom-1">
+                <div class="door-ver"></div>
+                <div class="door-ver"></div>
+                <div class="window-hor"></div>
+                <div class="rug"></div>
+                <div class="bathtub"></div>
+                <div class="vanity"></div>
+                <div class="toilet"></div>
+                <div class="name">bath #2</div>
+            </div>
+            <div class="office">
+                <div class="door-hor"></div>
+                <div class="window-hor"></div>
+                <div class="table"></div>
+                <div class="name">bedroom</div>
+            </div>
+            <div class="patio">
+                <div class="door-sliding"></div>
+                <div class="real-patio">
+                    <div class="name">balcony</div>
+                </div>
+                <div class="patio-table"></div>
+                <div class="patio-chair"></div>
+                <div class="patio-chair"></div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-html2canvas@latest/dist/jspdf-html2canvas.min.js"></script>
+
+<!-- Import the jsPDF-AutoTable library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+
+<!-- JavaScript to handle form submission, calculation of down payment amount, and PDF file generation -->
+<script src="script.js"></script>
+
+<script>
+
+
+    function showImage() {
+        // Get the selected option value from the dropdown menu
+
+        var housingOption = document.querySelector('input[name="housing-options"]:checked').value;
+
+        // Get the selected value from the slider
+        var numYears = document.getElementById("years").value;
+
+
+        // Set the source of the image based on the selected option
+        var imageSource = "";
+        if (housingOption == "studio") {
+            imageSource = "images/studio.jpg";
+        } else if (housingOption == "1bedroom") {
+            imageSource = "1bedroom.jpg";
+        } else if (housingOption == "2bedrooms") {
+            imageSource = "2bedrooms.jpg";
+        } else if (housingOption == "townhouse") {
+            imageSource = "townhouse.jpg";
+        }
+
+        // Get the dimensions of the image
+        var image = new Image();
+        image.src = imageSource;
+        var imageWidth = image.width;
+        var imageHeight = image.height;
+
+        // Calculate the number of rows and columns based on the image dimensions and the number of years selected
+        var numRows = Math.ceil(numYears / 12);
+        var numColumns = 12;
+        var boxWidth = imageWidth / numColumns;
+        var boxHeight = imageHeight / numRows;
+
+        // Generate the HTML for the boxes to be overlaid on the image
+        var boxesHTML = "";
+        for (var i = 0; i < numRows; i++) {
+            for (var j = 0; j < numColumns; j++) {
+                var boxLeft = j * boxWidth;
+                var boxTop = i * boxHeight;
+                boxesHTML += '<div class="box" style="left: ' + boxLeft + 'px; top: ' + boxTop + 'px; width: ' + boxWidth + 'px; height: ' + boxHeight + 'px"></div>';
+            }
+        }
+
+        console.log("Image source: " + imageSource);
+        console.log("Boxes HTML: " + boxesHTML);
+
+        // Update the image in the container with the selected image and boxes overlaid on top of it
+        document.getElementById("image-container").innerHTML = '<img src="' + imageSource + '" class="img-responsive">' + boxesHTML;
+    }
+
+    // Call the showImage function to display the image and boxes when the page loads
+    window.onload = showImage;
+
+</script>
+
+</html>

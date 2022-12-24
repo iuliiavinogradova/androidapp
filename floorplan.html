@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* Define the dimensions and layout of the floorplan */
+    .floorplan {
+      width: 800px;
+      height: 600px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+    }
+
+    /* Define the appearance of the different rooms */
+    .kitchen {
+      background-color: #f1c40f;
+      grid-column: 1 / 3;
+      grid-row: 1 / 2;
+    }
+
+    .bathroom {
+      background-color: #3498db;
+      grid-column: 3 / 4;
+      grid-row: 1 / 2;
+    }
+
+    .bedroom {
+      background-color: #e74c3c;
+      grid-column: 1 / 4;
+      grid-row: 2 / 3;
+    }
+
+    /* Define the dimensions and layout of the floorplan */
+    .floorplan-studio {
+      width: 400px;
+      height: 300px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+    }
+
+    /* Define the appearance of the studio */
+    .studio {
+      background-color: #9b59b6;
+      grid-column: 1 / 4;
+      grid-row: 1 / 4;
+    }
+
+    /* Style the furniture elements */
+    .furniture {
+      background-color: #fff;
+      border: 1px solid #000;
+      text-align: center;
+    }
+
+    /* Position the furniture elements within the studio */
+    .furniture:nth-child(1) {
+      /* Position the first piece of furniture (a sofa) */
+      grid-column: 1 / 3;
+      grid-row: 2 / 3;
+    }
+
+    .furniture:nth-child(2) {
+      /* Position the second piece of furniture (a coffee table) */
+      grid-column: 2 / 4;
+      grid-row: 2 / 3;
+    }
+
+    .furniture:nth-child(3) {
+      /* Position the third piece of furniture (a television) */
+      grid-column: 3 / 4;
+      grid-row: 1 / 2;
+    }
+
+    .furniture:nth-child(4) {
+      /* Position the fourth piece of furniture (bookshelves) */
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+
+    .furniture:nth-child(5) {
+      /* Position the fifth piece of furniture (a desk) */
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+    }
+
+    .furniture:nth-child(6) {
+      /* Position the sixth piece of furniture (a chair) */
+      grid-column: 3 / 4;
+      grid-row: 2 / 3;
+    }
+
+    .furniture:nth-child(7) {
+      /* Position the seventh piece of furniture (a bed) */
+      grid-column: 1 / 3;
+      grid-row: 3 / 4;
+    }
+
+    .furniture:nth-child(8) {
+      /* Position the eighth piece of furniture (a nightstand) */
+      grid-column: 1 / 2;
+      grid-row: 3 / 4;
+    }
+
+    .furniture:nth-child(9) {
+      /* Position the ninth piece of furniture (a lamp) */
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+    }
+
+    .furniture:nth-child(10) {
+      /* Position the tenth piece of furniture (a dresser) */
+      grid-column: 3 / 4;
+      grid-row: 3 / 4;
+    }
+
+    /* Style the bed element */
+    .bed {
+      width: 100px;
+      height: 150px;
+      border: 1px solid #000;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Draw the bed using CSS */
+    .bed::before {
+      content: "";
+      width: 50px;
+      height: 50px;
+      background-color: #000;
+      border-radius: 5px;
+      margin: auto;
+    }
+
+    .bed::after {
+      content: "";
+      width: 50px;
+      height: 50px;
+      background-color: #000;
+      border-radius: 5px;
+      margin: auto;
+    }
+
+    .bed div {
+      width: 50px;
+      height: 50px;
+      background-color: #000;
+      border-radius: 5px;
+      margin: auto;
+    }
+
+    .container {
+      display: grid;
+      grid-template-rows: 300px 300px;
+      grid-template-columns: 400px 400px;
+      grid-gap: 20px;
+    }
+
+    .living-room {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+      grid-row: 1 / 3;
+      grid-column: 1 / 3;
+    }
+
+    .sofa {
+      grid-row: 1 / 3;
+      grid-column: 1 / 2;
+      background-color: #F0E68C;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .coffee-table {
+      grid-row: 2;
+      grid-column: 2;
+      background-color: #8B4513;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .tv {
+      grid-row: 1;
+      grid-column: 2;
+      background-color: #A9A9A9;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .kitchen {
+      grid-row: 1;
+      grid-column: 3;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .counter {
+      grid-row: 1;
+      grid-column: 1 / 3;
+      background-color: #D3D3D3;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .stove {
+      grid-row: 2;
+      grid-column: 1;
+      background-color: #FFA07A;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .refrigerator {
+      grid-row: 2;
+      grid-column: 2;
+      background-color: #ADD8E6;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .bedroom {
+      grid-row: 2;
+      grid-column: 3;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .dresser {
+      grid-row: 1;
+      grid-column: 2;
+      background-color: #8B4513;
+      border-radius: 10px;
+    }
+
+    .nightstand {
+      grid-row: 2;
+      grid-column: 2;
+      background-color: #A9A9A9;
+      border-radius: 10px;
+    }
+  </style>
+
+  </style>
+</head>
+
+<body>
+  <div class="floorplan">
+    <div class="kitchen">Kitchen</div>
+    <div class="bathroom">Bathroom
+      <div class="furniture">Toilet</div>
+      <div class="furniture">Sink</div>
+      <div class="furniture">Shower</div>
+      <div class="furniture">Towel rack</div>
+      <div class="furniture">Medicine cabinet</div>
+    </div>
+
+    <div class="bedroom">Bedroom</div>
+  </div>
+
+  <div class="floorplan-studio">
+    <div class="studio">
+      <div class="furniture">Sofa</div>
+      <div class="furniture">Coffee table</div>
+      <div class="furniture">Television</div>
+      <div class="furniture">Bookshelves</div>
+      <div class="furniture">Desk</div>
+      <div class="furniture">Chair</div>
+      <div class="bed"></div>
+      <div class="furniture">Nightstand</div>
+      <div class="furniture">Lamp</div>
+      <div class="furniture">Dresser</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="living-room">
+      <div class="sofa">Sofa</div>
+      <div class="coffee-table">Coffee Table</div>
+      <div class="tv">TV</div>
+    </div>
+    <div class="kitchen">
+      <div class="counter">Counter</div>
+      <div class="stove">Stove</div>
+      <div class="refrigerator">Refrigerator</div>
+    </div>
+    <div class="bedrooms">
+      <div class="bed">Bed</div>
+      <div class="dresser">Dresser</div>
+      <div class="nightstand">Nightstand</div>
+    </div>
+  </div>
+
+</body>
+
+</html>
