@@ -5,155 +5,290 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortgage plan</title>
-
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <link rel="stylesheet" href="css/main.css">
+    <title>Down Payment Plan</title>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-        .box {
-            position: absolute;
-            border: 1px solid black;
-            /* Add transparency to the boxes */
-            opacity: 0.5;
+        html,
+        body {
+            height: 100%;
+            background: #fff;
+            font-family: "Poppins", sans-serif;
         }
 
-        #img-responsive {
+        .container {
+            min-height: 100%;
+            /* Equal to height of footer */
+            margin-bottom: 0px;
+            /* Negative value of footer height */
+        }
+
+        .footer {
+            color: #fff;
+            /* Clear floats */
+            text-align: center;
+            margin-top: 600px;
+            margin-bottom: 100px;
+        }
+
+        /* CSS to style the form  */
+        form {
+            width: 40%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            float: left;
+
+            left: 10px;
+            right: 10px;
+            bottom: 30px;
+            top: 20px;
             max-width: 100%;
-            height: auto;
+            max-height: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: rosybrown;
+            color: white;
+            padding: 14px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: royalblue;
+        }
+
+        input[type=radio] {
+            float: left;
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        .radio-label {
+            width: 100px;
+            margin-top: 0px;
+            display: inline;
+        }
+
+
+        #download-button {
+            width: 100%;
+            background-color: royalblue;
+            color: white;
+            padding: 14px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #download-button:hover {
+            background-color: royalblue;
+        }
+
+        /* Style the video: 100% width and height to cover the entire window */
+        #myVideo {
             position: relative;
+            right: 0;
+            bottom: 0;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+
+        /* Add some content at the bottom of the video/page */
+        .content {
+
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            bottom: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #f1f1f1;
+            max-width: 100%;
+            max-height: 100%;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                top: 70px;
+                bottom: 20px;
+                max-height: fit-content;
+                background: rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                background: transparent;
+                max-height: fit-content;
+                top: 70px;
+                background: rgba(0, 0, 0, 0.5);
+            }
+        }
+
+
+
+        #image-container {
+            display: inline-block;
+            /* This allows the image to be centered using the margin property */
+            margin: 40px;
+            /* This centers the image horizontally within the container element */
+        }
+
+        .box {
+            position: absolute;
+            top: 10px;
+            /* distance from the top of the image */
+            left: 10px;
+            /* distance from the left of the image */
+            border: 1px solid black;
+            opacity: 0.5;
+            z-index: 2;
+        }
+
+        @media (max-width: 600px) {
+            #img-responsive {
+                width: 80vw;
+                /* 80% of the viewport width on small screens */
+                height: 80vh;
+                /* 80% of the viewport height on small screens */
+            }
+
+            .box {
+                width: 40vw;
+                /* 40% of the viewport width on small screens */
+                height: 40vh;
+                /* 40% of the viewport height on small screens */
+            }
+
+            .form {
+                max-width: 100%;
+            }
+        }
+
+        #main-content {
+            min-height: 100%;
+            /* Other styles for the main content element */
+        }
+
+        footer a {
+            text-decoration: none;
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px dashed #333;
+            color: #333;
+            margin: 5px;
+        }
+
+        footer a:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        footer a .icons {
+            margin-top: 12px;
+            display: inline-block;
+            font-size: 20px;
         }
     </style>
 </head>
 
 <body>
-    <h1>How to save up for an apartment?</h1>
-    <p>Here is an interactive plan for you to save up for your future apartment.</p>
 
-    <form id="down-payment-form">
-        <input type="radio" id="studio" name="housing-options" value="studio" checked onclick="showImage()">
-        <label for="studio">Studio</label><br>
-        <input type="radio" id="1bedroom" name="housing-options" value="1bedroom" onclick="showImage()">
-        <label for="1bedroom">1 Bedroom</label><br>
-        <input type="radio" id="2bedrooms" name="housing-options" value="2bedrooms" onclick="showImage()">
-        <label for="2bedrooms">2 Bedrooms</label><br>
-        <input type="radio" id="townhouse" name="housing-options" value="townhouse" onclick="showImage()">
-        <label for="townhouse">Townhouse</label>
-        <label for="loan-amount">Loan Amount:</label><br>
-        <input type="number" id="loan-amount" name="loan-amount"><br>
-        <label for="down-payment-percentage">Down Payment Percentage:</label><br>
-        <input type="number" id="down-payment-percentage" name="down-payment-percentage"><br>
-        <label for="down-payment-percentage">Savings:</label><br>
-        <input type="number" id="down-payment-percentage" name="down-payment-percentage"><br>
-        <label for="years">Will be saving for:</label><br>
-        <input type="range" min="1" max="20" value="1" class="slider" id="years" oninput="showImage()">
+    <div class="container">
+        <!-- Add the main video to the page -->
+        <video src="videos/housewarming.mp4" autoplay loop id="myVideo" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
 
-        <input type="submit" value="Calculate Down Payment">
-        <!-- Button to download the PDF file -->
-        <button id="download-button">Download PDF</button>
-    </form>
 
-    <!-- Display the down payment amount -->
-    <div id="down-payment-amount"></div>
 
-    <!-- The image container will be populated with the appropriate image based on the selected radio button -->
-    <div id="image-container" class="img-responsive"></div>
+        <!-- overlay text to describe the video -->
+        <div class="content">
+            <h1>How to save up for a down payment fast</h1>
+            <p>Here is an interactive plan for you to save up for your future apartment.To take out a mortgage on an
+                apartment, it is important to first save for a down payment, which is typically 10-15% of
+                the apartment's cost. Our calculator can help you determine how much you need to save and provide you
+                with a savings
+                plan that is divided into cells. Each cell represents the amount of money you should save per month.
 
-    <div class="container" id="apartment-container">
-        <div class="main-content">
-            <div class="door-hor"></div>
-            <div class="utility">
-                <div class="door-hor"></div>
-                <div class="name">utility room</div>
-            </div>
-            <div class="kitchen">
-                <div class="ref"></div>
-                <div class="rug"></div>
-                <div class="cabinets">
-                    <div class="stove"></div>
-                </div>
-                <div class="sink">
-                    <div class="sink-tap-1"></div>
-                    <div class="sink-tap-2"></div>
-                </div>
-                <div class="island">
-                    <div class="chair"></div>
-                </div>
-                <div class="name">kitchen</div>
-            </div>
-            <div class="bathroom-2">
-                <div class="window-hor"></div>
-                <div class="door-hor"></div>
-                <div class="shower"></div>
-                <div class="toilet"></div>
-                <div class="vanity"></div>
-                <div class="rug"></div>
-                <div class="name">bath #1</div>
-            </div>
-            <div class="bedroom-2">
-                <div class="door-ver"></div>
-                <div class="window-hor"></div>
-                <div class="bed-table"></div>
-                <div class="bed">
-                    <div class="blanket"></div>
-                    <div class="pillow"></div>
-                </div>
-                <div class="table"></div>
-                <div class="name">bedroom</div>
-            </div>
+                Print the plan and display it prominently to stay motivated. As you save money each month, mark off the
+                cells. Once all
+                the cells are filled, you will have saved enough for the down payment.</p>
+        </div>
 
-            <div class="living-room">
-                <div class="rug"></div>
-                <div class="window-ver"></div>
-                <div class="sofa"></div>
-                <div class="coffee-table"></div>
-                <div class="tv-set"></div>
-                <div class="name">living room</div>
-            </div>
-            <div class="bedroom-1">
-                <div class="rug"></div>
-                <div class="door-hor"></div>
-                <div class="window-hor"></div>
-                <div class="bed">
-                    <div class="blanket"></div>
-                    <div class="pillow"></div>
-                    <div class="pillow"></div>
+        <div class="payment-form">
+
+            <form id="down-payment-form">
+                <input type="radio" id="studio" name="housing-options" value="studio" checked onclick="showImage()">
+                <label for="studio" class="radio-label">Studio</label><br>
+                <input type="radio" id="1bedroom" name="housing-options" value="1bedroom" onclick="showImage()">
+                <label for="1bedroom" class="radio-label">1 Bedroom</label><br>
+                <input type="radio" id="2bedrooms" name="housing-options" value="2bedrooms" onclick="showImage()">
+                <label for="2bedrooms" class="radio-label">2 Bedrooms</label><br>
+                <input type="radio" id="townhouse" name="housing-options" value="townhouse" onclick="showImage()">
+                <label for="townhouse" class="radio-label">Townhouse</label>
+
+                <label for="loan-amount" class="label">Loan Amount:</label><br>
+                <input type="number" id="loan-amount" name="loan-amount"><br>
+
+                <label for="down-payment-percentage">Down Payment Percentage:</label><br>
+                <input type="number" id="down-payment-percentage" name="down-payment-percentage"><br>
+
+                <label for="savings">Savings:</label><br>
+                <input type="number" id="savings" name="savings"><br>
+
+                <label for="years">Will be saving for how many years:</label><br>
+                <div class="slider">
+                    <input id="years" type="range" min="1" max="5" value="5"
+                        oninput="rangeValue.innerText = this.value;showImage()">
+                    <p id="rangeValue">5</p>
                 </div>
-                <div class="bed-table"></div>
-                <div class="bed-table"></div>
-                <div class="name">master bedroom</div>
-            </div>
-            <div class="closet">
-                <div class="wall-gap"></div>
-                <div class="name">walk-in closet</div>
-            </div>
-            <div class="bathroom-1">
-                <div class="door-ver"></div>
-                <div class="door-ver"></div>
-                <div class="window-hor"></div>
-                <div class="rug"></div>
-                <div class="bathtub"></div>
-                <div class="vanity"></div>
-                <div class="toilet"></div>
-                <div class="name">bath #2</div>
-            </div>
-            <div class="office">
-                <div class="door-hor"></div>
-                <div class="window-hor"></div>
-                <div class="table"></div>
-                <div class="name">bedroom</div>
-            </div>
-            <div class="patio">
-                <div class="door-sliding"></div>
-                <div class="real-patio">
-                    <div class="name">balcony</div>
-                </div>
-                <div class="patio-table"></div>
-                <div class="patio-chair"></div>
-                <div class="patio-chair"></div>
-            </div>
+
+                <input type="submit" value="Calculate Down Payment">
+                <!-- Button to download the PDF file -->
+                <button id="download-button">Download PDF</button>
+                <!-- Display the down payment amount -->
+                <div id="down-payment-amount"></div>
+            </form>
+
+            <!-- The image container will be populated with the appropriate image based on the selected radio button -->
+            <div id="image-container"><img src="images/studio.jpg" class="img-responsive"></div>
+
         </div>
     </div>
+
+
+
+    <footer class="footer">
+        <a href="https://www.linkedin.com/in/iuliiavinogradova/" target="_blank"><i
+                class="fa fa-linkedin icons"></i></a>
+        <a href="https://github.com/iuliiavinogradova" target="_blank"><i class="fa fa-github icons"></i></a>
+    </footer>
 
 
 </body>
@@ -169,63 +304,5 @@
 
 <!-- JavaScript to handle form submission, calculation of down payment amount, and PDF file generation -->
 <script src="script.js"></script>
-
-<script>
-
-
-    function showImage() {
-        // Get the selected option value from the dropdown menu
-
-        var housingOption = document.querySelector('input[name="housing-options"]:checked').value;
-
-        // Get the selected value from the slider
-        var numYears = document.getElementById("years").value;
-
-
-        // Set the source of the image based on the selected option
-        var imageSource = "";
-        if (housingOption == "studio") {
-            imageSource = "images/studio.jpg";
-        } else if (housingOption == "1bedroom") {
-            imageSource = "1bedroom.jpg";
-        } else if (housingOption == "2bedrooms") {
-            imageSource = "2bedrooms.jpg";
-        } else if (housingOption == "townhouse") {
-            imageSource = "townhouse.jpg";
-        }
-
-        // Get the dimensions of the image
-        var image = new Image();
-        image.src = imageSource;
-        var imageWidth = image.width;
-        var imageHeight = image.height;
-
-        // Calculate the number of rows and columns based on the image dimensions and the number of years selected
-        var numRows = Math.ceil(numYears / 12);
-        var numColumns = 12;
-        var boxWidth = imageWidth / numColumns;
-        var boxHeight = imageHeight / numRows;
-
-        // Generate the HTML for the boxes to be overlaid on the image
-        var boxesHTML = "";
-        for (var i = 0; i < numRows; i++) {
-            for (var j = 0; j < numColumns; j++) {
-                var boxLeft = j * boxWidth;
-                var boxTop = i * boxHeight;
-                boxesHTML += '<div class="box" style="left: ' + boxLeft + 'px; top: ' + boxTop + 'px; width: ' + boxWidth + 'px; height: ' + boxHeight + 'px"></div>';
-            }
-        }
-
-        console.log("Image source: " + imageSource);
-        console.log("Boxes HTML: " + boxesHTML);
-
-        // Update the image in the container with the selected image and boxes overlaid on top of it
-        document.getElementById("image-container").innerHTML = '<img src="' + imageSource + '" class="img-responsive">' + boxesHTML;
-    }
-
-    // Call the showImage function to display the image and boxes when the page loads
-    window.onload = showImage;
-
-</script>
 
 </html>
